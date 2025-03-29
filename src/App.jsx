@@ -11,7 +11,7 @@ import './App.css'
 function App() {
   
   return (
-    <Router>
+  <Router>
     <Routes>
       <Route path="/" element={<Home />} />  {/* Página de login */}
       <Route path="/publica" element={<PublicPage />} />  Página pública
