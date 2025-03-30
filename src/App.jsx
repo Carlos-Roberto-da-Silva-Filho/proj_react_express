@@ -1,31 +1,36 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Home from './components/Home'  // Componente de Login
-import PublicPage from './components/PublicPage'  // Página pública
-import PrivatePage from './components/PrivatePage' // Página privada
-import PrivateRoute from './components/PrivateRoute' // RotaPrivada
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CurrencyProvider } from "./utils/CurrencyContext"; // Contexto de câmbio
+import { AuthProvider } from "./utils/AuthContext"; // Contexto de autenticação
+import NavBar from "./components/NavBar"; // Navbar
+import Home from "./pages/Home"; // Página de login
+import PublicProducts from "./pages/PublicProducts"; // Página pública de produtos
+import PrivateProducts from "./pages/PrivateProducts"; // Página privada de produtos
+import PrivateRoute from "./components/PrivateRoute"; // Rota privada
+import "./App.css"; // Estilos globais
 
 function App() {
-  
   return (
-  <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />  {/* Página de login */}
-      <Route path="/publica" element={<PublicPage />} />  Página pública
-      <Route
-        path="/privada"
-        element={
-          <PrivateRoute>
-            <PrivatePage />  {/* Página privada que requer login */}
-          </PrivateRoute>
-        }
-      />
-    </Routes>
-  </Router>
-  )
+    <AuthProvider> {/* Envolvendo toda a aplicação no AuthProvider */}
+      <CurrencyProvider> {/* Envolvendo também no CurrencyProvider */}
+        <Router>
+          <NavBar /> {/* Exibe a NavBar em todas as páginas */}
+          <Routes>
+            <Route path="/" element={<Home />} /> {/* Página de login */}
+            <Route path="/products-general" element={<PublicProducts />} /> {/* Produtos públicos */}
+            <Route
+              path="/products-client"
+              element={
+                <PrivateRoute>
+                  <PrivateProducts /> {/* Página privada de produtos */}
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </CurrencyProvider>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

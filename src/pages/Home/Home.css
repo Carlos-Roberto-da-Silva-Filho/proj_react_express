@@ -1,0 +1,52 @@
+/* src/pages/Home/Home.css */
+
+/* O fundo linear-gradient será herdado do App.css */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: whitesmoke;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-field {
+  padding: 10px;
+  font-size: 16px;
+  background: black;
+  color: green;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.input-field::placeholder {
+  color: white; /* Cor do placeholder */
+  text-align: center; /* Centralizando o placeholder */
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  background: black;
+  color: green;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgb(39, 169, 244);
+  color: white;
+}
+
+.error-message {
+  font-size: 16px;
+  background: black;
+  color: orangered;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}

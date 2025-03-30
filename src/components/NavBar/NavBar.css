@@ -1,0 +1,56 @@
+/* src/components/NavBar/NavBar.css */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-logo img {
+    width: 60px;
+    margin-right: 20px; /* Espaço entre o logo e os links */
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.navbar-links a:hover {
+    color: rgb(0, 255, 0);
+}
+
+/* Estilo para o ícone de carrinho */
+.navbar-cart {
+    margin-left: 20px; /* Espaço entre os links e o ícone de carrinho */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.navbar-cart a {
+    color: white;
+    text-decoration: none;
+}
+
