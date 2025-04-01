@@ -12,12 +12,6 @@ const NavBar = () => {
   // Usando o hook do AuthContext para verificar se o usuário está autenticado
   const { isAuthenticated, logout } = useAuth();
 
-  const handleClientProductsClick = () => {
-    if (!isAuthenticated) {
-      // Se o usuário não estiver autenticado, redireciona para a página de login
-      navigate("/", { replace: true });
-    }
-  };
 
   return (
     <div className="navbar">
@@ -27,16 +21,12 @@ const NavBar = () => {
         </div>
         <div className="navbar-links">
           <Link to="/products-general">Produtos Gerais</Link>
-          {isAuthenticated && (
-            <Link to="/products-client" onClick={handleClientProductsClick}>
-              Produtos Cliente
-            </Link>
-          )}
+          {isAuthenticated && <Link to="/products-client">Produtos Cliente</Link>}
           <Link to="/">Home</Link>
           
           {/* Exibe o link de Logout ou outros links baseados no estado de autenticação */}
           {isAuthenticated ? (
-            <button onClick={logout} className="navbar-logout-btn">Logout</button>
+            <Link to="/" onClick={logout} className="navbar-logout-link">Logout</Link> 
           ) : (
             <Link to="/login">Login</Link>
           )}
@@ -45,8 +35,8 @@ const NavBar = () => {
         {/* Exibe o ícone do carrinho se o usuário estiver autenticado */}
         {isAuthenticated && (
           <div className="navbar-cart">
-            <Link to="/cart">
-              <FaShoppingCart size={30} color="white" />
+            <Link to="/carrinho">
+              <FaShoppingCart size={30} color="currentColor" />
             </Link>
           </div>
         )}
