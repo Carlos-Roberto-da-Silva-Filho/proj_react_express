@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setIsAuthenticated(true);
     }
-  }, []);
+  }, []); // Verifica a autenticação uma vez no carregamento da aplicação
 
   // Função para fazer login
   const login = (token) => {
