@@ -4,11 +4,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+import { useAuth } from "../../utils/AuthContext";
+
 const Login = () => {
   const [username, setUsername] = useState(""); // Estado para o username
   const [password, setPassword] = useState(""); // Estado para a senha
   const [error, setError] = useState(""); // Estado para mensagem de erro
   const navigate = useNavigate(); // Hook para navegação
+
+  const { login } = useAuth();
 
   // Função para capturar o envio do formulário
   const handleLogin = async (e) => {
@@ -30,10 +34,12 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json(); // Converte a resposta para JSON
-        console.log(data);
+        console.log("Token recebido:", data.accessToken);
+
         // Armazena o token no sessionStorage
         sessionStorage.setItem("token", data.accessToken);
-        navigate("/products-client"); // Redireciona após login
+        login(data.accessToken);
+        navigate("/products-client", {replace: true}); // Redireciona após login
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Erro no login!"); // Mensagem de erro, se houver
