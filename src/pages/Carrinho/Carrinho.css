@@ -1,0 +1,21 @@
+/* src/pages/Carrinho/Carrinho.css */
+.container {
+    padding: 20px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.cart-table img {
+    vertical-align: middle;
+    margin-right: 10px;
+}

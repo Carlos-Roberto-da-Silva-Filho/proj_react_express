@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-import { useAuth } from "../../utils/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState(""); // Estado para o username

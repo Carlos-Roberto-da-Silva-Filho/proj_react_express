@@ -1,0 +1,18 @@
+/* src/components/CartIcon.css */
+.cart-icon-container {
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+}

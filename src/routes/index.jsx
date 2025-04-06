@@ -5,8 +5,9 @@ import PublicProducts from "../pages/PublicProducts";  // A página pública de 
 import PrivateProducts from "../pages/PrivateProducts";  // A página privada de produtos está em src/pages/index.jsx
 import Home from "../pages/Home"; // A página home está em src/pages/Home/index.jsxx
 import Login from "../pages/Login";  // A página login está em src/pages/Login/index.jsx
-import PrivateRoute from "../components/PrivateRoute";  // O componente de Rota Privada está em src/components/index.jsx
 import Carrinho from "../pages/Carrinho";
+
+import PrivateRoute from "../components/PrivateRoute";  // O componente de Rota Privada está em src/components/index.jsx
 
 const RoutesConfig = () => {
   return (
@@ -18,11 +19,20 @@ const RoutesConfig = () => {
         path="/products-client"
         element={
           <PrivateRoute>
-            <PrivateProducts />  {/* Página privada de produtos */}
+            <PrivateProducts />  
           </PrivateRoute>
         }
-      />
-      <Route path="/carrinho" element={<Carrinho />} />
+      />{/* Página privada de produtos */}
+
+      <Route
+        path="/carrinho"
+        element={
+          <PrivateRoute> 
+            <Carrinho />
+          </PrivateRoute>
+        }
+      /> {/* Página privada do carrinho */}
+      
     </Routes>
   );
 };
