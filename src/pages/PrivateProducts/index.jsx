@@ -1,41 +1,44 @@
 // src/components/PrivateProducts.jsx
-import React, { useEffect, useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
-import { useCurrency } from "../../utils/CurrencyContext";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../../contexts/CartContext";
-import "./PrivateProducts.css";
+import React, { useEffect, useState } from "react"
+import { FaShoppingCart } from "react-icons/fa"
+import { useCurrency } from "../../utils/CurrencyContext"
+import { useNavigate } from "react-router-dom"
+import { useCart } from "../../contexts/CartContext"
+import "./PrivateProducts.css"
 
 const PrivateProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const { exchangeRate } = useCurrency();
-  const { addToCart } = useCart();
-  const navigate = useNavigate();
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+  const { exchangeRate } = useCurrency()
+  const { addToCart } = useCart()
+  const navigate = useNavigate()
 
+  // Busca os produtos da API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://dummyjson.com/products");
-        const data = await response.json();
-        setProducts(data.products.slice(5, 15));
+        const response = await fetch("https://dummyjson.com/products")
+        const data = await response.json()
+        setProducts(data.products.slice(5, 15)) // Pegando apenas 10 produtos
       } catch (error) {
-        setError("Erro ao carregar os produtos");
+        setError("Erro ao carregar os produtos")
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchProducts();
-  }, []);
+    fetchProducts()
+  }, [])
 
+  // Converte o valor de dólar para reais
   const convertToBRL = (usdPrice) => {
     return exchangeRate
       ? `R$ ${(usdPrice * exchangeRate).toFixed(2)}`
-      : "Carregando...";
-  };
+      : "Carregando..."
+  }
 
+  // Adiciona produto ao carrinho com quantidade
   const handleAddToCart = (product, quantity) => {
     const produtoFormatado = {
       id: product.id,
@@ -43,14 +46,14 @@ const PrivateProducts = () => {
       price: product.price,
       thumbnail: product.thumbnail,
       quantity: Number(quantity),
-    };
+    }
 
     addToCart(produtoFormatado);
     navigate("/carrinho");
-  };
+  }
 
-  if (loading) return <div className="container">Carregando...</div>;
-  if (error) return <div className="container">{error}</div>;
+  if (loading) return <div className="container">Carregando...</div>
+  if (error) return <div className="container">{error}</div>
 
   return (
     <div className="container">
@@ -93,7 +96,7 @@ const PrivateProducts = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PrivateProducts;
+export default PrivateProducts

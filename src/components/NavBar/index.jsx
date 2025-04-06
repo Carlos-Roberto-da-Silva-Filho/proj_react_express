@@ -1,24 +1,23 @@
 // src/components/NavBar/index.jsx
-import { Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import logo from "../../assets/logo.png";
-import { useAuth } from "../../contexts/AuthContext";
-import { useCart } from "../../contexts/CartContext"; // ⬅️ Importa o contexto do carrinho
-import CartIcon from "../CartIcons";
-import "./NavBar.css";
+import { Link, useNavigate } from "react-router-dom"
+import logo from "../../assets/logo.png"
+import { useAuth } from "../../contexts/AuthContext"
+import { useCart } from "../../contexts/CartContext"
+import CartIcon from "../CartIcons"
+import "./NavBar.css"
 
 const NavBar = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
-  const { clearCart } = useCart(); // ⬅️ Usa a função para limpar o carrinho
+  const navigate = useNavigate()
+  const { isAuthenticated, logout } = useAuth()
+  const { clearCart } = useCart()
 
   const handleLogout = () => {
     console.log("Usuário está autenticado: ", isAuthenticated);
 
-    clearCart(); // ⬅️ Limpa o estado e localStorage do carrinho
-    logout();
-    navigate("/");
-  };
+    clearCart()
+    logout()
+    navigate("/")
+  }
 
   return (
     <div className="navbar">
@@ -27,9 +26,9 @@ const NavBar = () => {
           <img src={logo} alt="Logo" className="navbar-logo-img" />
         </div>
         <div className="navbar-links">
+          <Link to="/">Home</Link>
           <Link to="/products-general">Produtos Gerais</Link>
           {isAuthenticated && <Link to="/products-client">Produtos Cliente</Link>}
-          <Link to="/">Home</Link>
 
           {isAuthenticated ? (
             <Link to="/" onClick={handleLogout} className="navbar-logout-link">Logout</Link>
@@ -45,8 +44,8 @@ const NavBar = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar
 

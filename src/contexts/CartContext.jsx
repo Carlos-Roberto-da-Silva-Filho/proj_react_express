@@ -1,60 +1,64 @@
 // src/contexts/CartContext.jsx
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useState, useContext, useEffect } from 'react'
 
-const CartContext = createContext();
+const CartContext = createContext()
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+// Hook nomeado fora do componente para compatibilidade com Vite
+export function useCart() {
+  return useContext(CartContext)
+}
 
+export function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([])
+
+  // Carrega o carrinho do localStorage ao iniciar
   useEffect(() => {
-    const storedCart = localStorage.getItem("carrinho");
+    const storedCart = localStorage.getItem('cart')
     if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+      setCartItems(JSON.parse(storedCart))
     }
-  }, []);
+  }, [])
 
+  // Atualiza o localStorage sempre que o carrinho mudar
   useEffect(() => {
-    localStorage.setItem("carrinho", JSON.stringify(cartItems));
-  }, [cartItems]);
+    localStorage.setItem('cart', JSON.stringify(cartItems))
+  }, [cartItems])
 
-  const addToCart = (product) => {
-    const quantity = Number(product.quantity) || 1;
+  // Adiciona produto ao carrinho
+  const addToCart = (item) => {
+    const exists = cartItems.find(prod => prod.id === item.id)
 
-    setCartItems((prevItems) => {
-      const existingIndex = prevItems.findIndex((item) => item.id === product.id);
+    if (exists) {
+      setCartItems(prev =>
+        prev.map(prod =>
+          prod.id === item.id
+            ? {
+                ...prod,
+                quantity: Number(prod.quantity) + Number(item.quantity),
+              }
+            : prod
+        )
+      )
+    } else {
+      setCartItems(prev => [...prev, { ...item, quantity: Number(item.quantity) }])
+    }
+  }
 
-      if (existingIndex !== -1) {
-        const updatedItems = [...prevItems];
-        const existingItem = updatedItems[existingIndex];
+  // Remove produto do carrinho
+  const removeFromCart = (id) => {
+    setCartItems(prev => prev.filter(item => item.id !== id))
+  }
 
-        updatedItems[existingIndex] = {
-          ...existingItem,
-          quantity: existingItem.quantity + quantity, // ✅ adiciona corretamente sem duplicar
-        };
-
-        return updatedItems;
-      }
-
-      return [...prevItems, { ...product, quantity }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
-  };
-
+  // Limpa todo o carrinho
   const clearCart = () => {
-    setCartItems([]);
-    localStorage.removeItem("carrinho");
-  };
+    setCartItems([])
+  }
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
-  );
-};
-
-export const useCart = () => useContext(CartContext);
+  )
+}

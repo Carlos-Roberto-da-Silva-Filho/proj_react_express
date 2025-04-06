@@ -1,25 +1,25 @@
-import React from "react";
-import { useCart } from "../../contexts/CartContext";
-import "./Carrinho.css";
+import React from "react"
+import { useCart } from "../../contexts/CartContext"
+import "./Carrinho.css"
 
 const Carrinho = () => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart } = useCart()
 
   const removerProduto = (id) => {
-    const confirmar = window.confirm("Deseja realmente remover este produto?");
-    if (!confirmar) return;
-    removeFromCart(id);
+    const confirmar = window.confirm("Deseja realmente remover este produto?")
+    if (!confirmar) return
+    removeFromCart(id)
   };
 
   const calcularTotal = () => {
     return cartItems
       .reduce((total, item) => {
-        const preco = Number(item.price);
-        const qtd = Number(item.quantity);
-        return total + preco * qtd;
+        const preco = Number(item.price)
+        const qtd = Number(item.quantity)
+        return total + preco * qtd
       }, 0)
-      .toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-  };
+      .toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+  }
 
   return (
     <div className="container">
@@ -41,9 +41,9 @@ const Carrinho = () => {
             </thead>
             <tbody>
               {cartItems.map((item) => {
-                const preco = Number(item.price);
-                const qtd = Number(item.quantity);
-                const subtotal = preco * qtd;
+                const preco = Number(item.price)
+                const qtd = Number(item.quantity)
+                const subtotal = preco * qtd
 
                 return (
                   <tr key={item.id}>
@@ -78,7 +78,7 @@ const Carrinho = () => {
                       </button>
                     </td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
@@ -87,7 +87,7 @@ const Carrinho = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Carrinho;
+export default Carrinho

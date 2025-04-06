@@ -22,8 +22,8 @@ form {
 }
 
 .input-field::placeholder {
-  color: white; /* Cor do placeholder */
-  text-align: center; /* Centralizando o placeholder */
+  color: white; 
+  text-align: center; 
 }
 
 button {

@@ -1,11 +1,11 @@
 // src/App.jsx
-import { BrowserRouter as Router } from "react-router-dom";
-import { CurrencyProvider } from "./utils/CurrencyContext"; // Contexto de câmbio
-import { AuthProvider } from "./contexts/AuthContext"; // Contexto de autenticação
-import { CartProvider } from "./contexts/CartContext"; // Contexto do carrinho
-import NavBar from "./components/NavBar"; // Navbar
-import RoutesConfig from "./routes"; // Importação da configuração de rotas
-import "./App.css"; // Estilos globais
+import { BrowserRouter as Router } from "react-router-dom"
+import { CurrencyProvider } from "./utils/CurrencyContext" // Contexto de câmbio
+import { AuthProvider } from "./contexts/AuthContext" // Contexto de autenticação
+import { CartProvider } from "./contexts/CartContext" // Contexto do carrinho
+import NavBar from "./components/NavBar" // Navbar
+import RoutesConfig from "./routes" // Importação da configuração de rotas
+import "./App.css" // Estilos globais
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         </CartProvider>
       </CurrencyProvider>
     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,13 +1,13 @@
 // src/routes/index.jsx
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"
 // Ajuste nos caminhos de importação para corresponder à sua estrutura de pastas
-import PublicProducts from "../pages/PublicProducts";  // A página pública de produtos está em src/pages/index.jsx
-import PrivateProducts from "../pages/PrivateProducts";  // A página privada de produtos está em src/pages/index.jsx
-import Home from "../pages/Home"; // A página home está em src/pages/Home/index.jsxx
-import Login from "../pages/Login";  // A página login está em src/pages/Login/index.jsx
-import Carrinho from "../pages/Carrinho";
+import PublicProducts from "../pages/PublicProducts"  // A página pública de produtos está em src/pages/index.jsx
+import PrivateProducts from "../pages/PrivateProducts"  // A página privada de produtos está em src/pages/index.jsx
+import Home from "../pages/Home" // A página home está em src/pages/Home/index.jsxx
+import Login from "../pages/Login"  // A página login está em src/pages/Login/index.jsx
+import Carrinho from "../pages/Carrinho"
 
-import PrivateRoute from "../components/PrivateRoute";  // O componente de Rota Privada está em src/components/index.jsx
+import PrivateRoute from "../components/PrivateRoute"  // O componente de Rota Privada está em src/components/index.jsx
 
 const RoutesConfig = () => {
   return (
@@ -34,8 +34,8 @@ const RoutesConfig = () => {
       /> {/* Página privada do carrinho */}
       
     </Routes>
-  );
-};
+  )
+}
 
-export default RoutesConfig;
+export default RoutesConfig
 
