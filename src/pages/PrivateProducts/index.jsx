@@ -18,9 +18,12 @@ const PrivateProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://dummyjson.com/products")
+        // const response = await fetch("https://dummyjson.com/products")
+        const response = await fetch("http://localhost:3000/produtos")
         const data = await response.json()
-        setProducts(data.products.slice(5, 15)) // Pegando apenas 10 produtos
+        console.log("Produtos recebidos do backend:", data)
+        setProducts(data)
+        // setProducts(data.products.slice(5, 15)) // Pegando apenas 10 produtos
       } catch (error) {
         setError("Erro ao carregar os produtos")
       } finally {

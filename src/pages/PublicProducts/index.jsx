@@ -14,8 +14,9 @@ const PublicProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://dummyjson.com/products")
-        setProducts(response.data.products.slice(5, 15)) // Pega apenas os produtos desejados
+        const response = await axios.get("http://localhost:3000/produtos")
+        console.log("Produtos recebidos do backend:", response.data)
+        setProducts(response.data) // Pega os produtos desejados
       } catch (error) {
         setError("Erro ao carregar os produtos")
       } finally {
