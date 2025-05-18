@@ -83,7 +83,7 @@ Este projeto representa uma evolução de um e-commerce construído com React, i
     * Crie um arquivo `.env` na raiz do seu projeto frontend (se ainda não existir).
     * Adicione a URL do seu backend (onde a API está rodando):
         ```
-        REACT_APP_API_URL=http://localhost:3000/admin # ou a URL do seu backend no Railway
+        REACT_APP_API_URL=http://localhost:3000/
         ```
 4.  **Inicie o servidor de desenvolvimento:**
     ```bash
@@ -97,8 +97,7 @@ Este projeto representa uma evolução de um e-commerce construído com React, i
 
 1.  **Clone o repositório do backend:**
     ```bash
-    git clone [https://github.com/Jovens-Genios/Trilha-de-Aprendizado-Backend](https://github.com/Jovens-Genios/Trilha-de-Aprendizado-Backend)
-    cd [nome da pasta do seu repositório backend]
+    git clone https://github.com/Carlos-Roberto-da-Silva-Filho/bacck_end_express.git
     ```
 2.  **Instale as dependências:**
     ```bash
