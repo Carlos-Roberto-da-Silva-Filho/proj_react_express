@@ -1,66 +1,99 @@
 /* src/components/NavBar/NavBar.css */
+
 .navbar {
+    color: white;
+    padding: 1rem 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 0;
+    background-color: transparent;
 }
 
 .navbar-container {
     display: flex;
-    justify-content: center;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
+    justify-content: space-between;
+    /* Espaçamento entre logo e links/direita */
 }
 
 .navbar-logo img {
-    width: 60px;
-    height: 60px;
-    margin-right: 20px;
-    /* Espaço entre o logo e os links */
+    max-height: 50px;
 }
 
 .navbar-links {
     display: flex;
-    gap: 20px;
+    gap: 1rem;
+    /* margin: 0 auto; Removido para controlar o alinhamento condicionalmente */
+    align-items: center;
+    /* Alinhar os itens verticalmente */
 }
 
 .navbar-links a {
     color: white;
     text-decoration: none;
-    font-size: 24px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 20px;
 }
 
 .navbar-links a:hover {
-    color: rgb(0, 255, 0);
+    background-color: #006a00;
 }
 
-/* Estilo para o ícone de carrinho */
-.navbar-cart {
-    margin-left: 20px;
+.navbar-right {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: #007bff;
-    border-radius: 8px;
-    padding: 4px;
-    cursor: pointer;
+    gap: 1rem;
+    /* margin-left: auto; Removido para permitir o alinhamento dos links */
 }
 
-.navbar-cart a {
+.navbar-admin-link {
+    background-color: rgb(75, 156, 40);
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 15px;
+    color: #eee;
+    transition: color 0.3s ease;
+}
+
+.navbar-admin-link:hover {
+    background-color: green;
+    color: white;
+}
+
+.navbar-logout-link {
     color: white;
     text-decoration: none;
-}
-
-.navbar-cart a:hover {
-  color: black;
-  transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
 }
 
 .navbar-logout-link:hover {
-    background-color: black;
-    border-radius: 4px;
+    background-color: #006a00;
+}
+
+.navbar-cart {
+    margin-left: 1rem;
+}
+
+/* Estilos para centralizar os links quando o usuário NÃO está autenticado */
+.navbar-links-unauthenticated {
+    justify-content: center;
+    /* Centraliza os itens horizontalmente */
+    width: 100%;
+    /* Garante que ocupe a largura disponível */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Esconde o navbar-right quando não autenticado para melhor centralização */
+.navbar-links-unauthenticated+.navbar-right {
+    display: none;
 }

@@ -1,22 +1,18 @@
 // src/components/Login/index.jsx
-
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
-
 import { useAuth } from "../../contexts/AuthContext"
 
 const Login = () => {
-  const [username, setUsername] = useState("") // Estado para o username
-  const [password, setPassword] = useState("") // Estado para a senha
-  const [error, setError] = useState("") // Estado para mensagem de erro
-  const navigate = useNavigate() // Hook para navegação
-
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
   const { login } = useAuth()
 
-  // Função para capturar o envio do formulário
   const handleLogin = async (e) => {
-    e.preventDefault() // Previne o comportamento padrão do formulário (recarregar a página)
+    e.preventDefault()
 
     const userData = {
       username: username,
@@ -24,57 +20,57 @@ const Login = () => {
     }
 
     try {
-      // const response = await fetch("https://dummyjson.com/auth/login"
       const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST", // Método HTTP
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData), // Envia os dados do usuário como JSON
+        body: JSON.stringify(userData),
       })
 
       if (response.ok) {
-        const data = await response.json(); // Converte a resposta para JSON
+        const data = await response.json()
         console.log("Token recebido:", data.accessToken)
+        console.log("Tipo de usuário:", data.tipo) // Log para verificar o tipo
 
-        // Armazena o token no sessionStorage
-        sessionStorage.setItem("token", data.accessToken)
-        login(data.accessToken);
-        navigate("/products-client", {replace: true}) // Redireciona após login
+        login(data.accessToken, data.tipo) // Passa o token e o tipo
+        navigate("/products-client", { replace: true })
       } else {
-        const errorData = await response.json()
-        setError(errorData.error || "Erro no login!") // Mensagem de erro, se houver
-        sessionStorage.removeItem("token") // Remove qualquer token armazenado antes de redirecionar
-        navigate("/login") // Se der erro, mantém na página de login
+        const errorData = await response.json();
+        setError(errorData.error || "Erro no login!")
+        sessionStorage.removeItem("token")
+        navigate("/login")
       }
     } catch (error) {
-      setError("Erro na requisição! Tente novamente."); // Erro de rede
+      setError("Erro na requisição! Tente novamente.")
     }
   }
 
   return (
     <div className="container">
-      <h1>Seja bem-vindo</h1> 
+      <h1>Seja bem-vindo</h1>
       <p>Para acessar a pagina de Produtos Cliente, faça login</p>
-      <p>Usuário: "michaelw"</p>
-      <p>Senha: "michaelwpass"</p>
+      <p>Usuário: "carlos"</p>
+      <p>Senha: "password456"</p>
+      <p>Para acessar o dashboard Admin, faça login</p>
+      <p>Usuário: "Admin_Sergio"</p>
+      <p>Senha: "admin123"</p>
       <form onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="Usuário"
           className="input-field"
           value={username}
-          onChange={(e) => setUsername(e.target.value)} // Atualiza o estado do usuário
+          onChange={(e) => setUsername(e.target.value)}
         />
-
         <input
           type="password"
           placeholder="Senha"
           className="input-field"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} // Atualiza o estado da senha
+          onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="error-message">Usuário e/ou senha errados</p>} {/* Exibe mensagem de erro */}
+        {error && <p className="error-message">Usuário e/ou senha errados</p>}
         <button type="submit">Login</button>
       </form>
     </div>

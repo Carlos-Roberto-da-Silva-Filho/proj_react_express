@@ -13,23 +13,23 @@ const PrivateProducts = () => {
   const { exchangeRate } = useCurrency()
   const { addToCart } = useCart()
   const navigate = useNavigate()
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 10
 
   // Busca os produtos da API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // const response = await fetch("https://dummyjson.com/products")
         const response = await fetch("http://localhost:3000/produtos")
-        const data = await response.json()
+        const data = await response.json();
         console.log("Produtos recebidos do backend:", data)
         setProducts(data)
-        // setProducts(data.products.slice(5, 15)) // Pegando apenas 10 produtos
       } catch (error) {
         setError("Erro ao carregar os produtos")
       } finally {
         setLoading(false)
       }
-    }
+    };
 
     fetchProducts()
   }, [])
@@ -51,9 +51,18 @@ const PrivateProducts = () => {
       quantity: Number(quantity),
     }
 
-    addToCart(produtoFormatado);
-    navigate("/carrinho");
+    addToCart(produtoFormatado)
+    navigate("/carrinho")
   }
+
+  // Lógica de paginação
+  const indexOfLastProduct = currentPage * productsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
+
+  const totalPages = Math.ceil(products.length / productsPerPage)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   if (loading) return <div className="container">Carregando...</div>
   if (error) return <div className="container">{error}</div>
@@ -62,10 +71,10 @@ const PrivateProducts = () => {
     <div className="container">
       <h1>Produtos do Cliente</h1>
       <div className="products-grid">
-        {products.map((product) => (
+        {currentProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img
-              src={product.thumbnail}
+              src={`http://localhost:3000${product.thumbnail}`}
               alt={product.title}
               className="product-image"
             />
@@ -85,7 +94,7 @@ const PrivateProducts = () => {
                 onClick={() => {
                   const input = document.getElementById(
                     `quantidade-${product.id}`
-                  );
+                  )
                   const quantity = parseInt(input.value);
                   if (quantity >= 1) {
                     handleAddToCart(product, quantity);
@@ -97,6 +106,21 @@ const PrivateProducts = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Botões de paginação */}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+          (number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={currentPage === number ? "active" : ""}
+            >
+              {number}
+            </button>
+          )
+        )}
       </div>
     </div>
   )

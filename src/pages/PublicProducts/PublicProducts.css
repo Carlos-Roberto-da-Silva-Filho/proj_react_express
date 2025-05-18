@@ -1,6 +1,7 @@
 /* src/pages/PublicProducts/PublicProducts.css */
 .container {
-  margin-top: 120px; /* Para garantir que o conteúdo não invada o Navbar fixo */
+  margin-top: 120px;
+  /* Para garantir que o conteúdo não invada o Navbar fixo */
   text-align: center;
   padding: 0 12px;
   color: white;
@@ -9,7 +10,8 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+  grid-template-columns: repeat(5, 1fr);
+  /* 5 colunas */
   gap: 20px;
   justify-items: center;
   margin-top: 8px;
@@ -19,7 +21,8 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
-  width: 180px; /* Ajuste o tamanho do cartão do produto */
+  width: 180px;
+  /* Ajuste o tamanho do cartão do produto */
   height: 220px;
   padding: 12px;
   text-align: center;
@@ -42,4 +45,28 @@
   font-weight: bold;
   color: green;
   margin-top: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
 }

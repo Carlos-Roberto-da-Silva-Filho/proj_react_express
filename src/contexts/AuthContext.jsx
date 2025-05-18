@@ -1,39 +1,58 @@
-// src/contexts/AuthContext.jsx
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Criação do contexto
-const AuthContext = createContext()
+const AuthContext = createContext();
 
-// Hook nomeado fora do componente (ajuda o Fast Refresh a entender)
+// Hook customizado para acesso fácil ao contexto
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }
 
 // Provider do contexto
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(null);
+  const [perfil, setPerfil] = useState(null); // "admin" ou "user"
 
-  // Verifica o token ao carregar a aplicação
+  // Ao iniciar o app, tenta restaurar sessão do sessionStorage
   useEffect(() => {
-    const token = sessionStorage.getItem('token')
-    if (token) {
-      setIsAuthenticated(true)
+    const storedToken = sessionStorage.getItem('token');
+    const storedPerfil = sessionStorage.getItem('perfil');
+
+    if (storedToken && storedPerfil) {
+      setToken(storedToken);
+      setPerfil(storedPerfil);
+      setIsAuthenticated(true);
     }
-  }, [])
+  }, []);
 
-  const login = (token) => {
-    sessionStorage.setItem('token', token)
-    setIsAuthenticated(true)
-  }
+  // Função de login
+  const login = (tokenRecebido, perfilRecebido) => {
+    sessionStorage.setItem('token', tokenRecebido);
+    sessionStorage.setItem('perfil', perfilRecebido);
 
+    setToken(tokenRecebido);
+    setPerfil(perfilRecebido);
+    setIsAuthenticated(true);
+  };
+
+  // Função de logout
   const logout = () => {
-    sessionStorage.removeItem('token')
-    setIsAuthenticated(false)
-  }
+    sessionStorage.clear();
+    setToken(null);
+    setPerfil(null);
+    setIsAuthenticated(false);
+  };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{
+      isAuthenticated,
+      token,
+      perfil,
+      login,
+      logout
+    }}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }

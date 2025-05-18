@@ -1,41 +1,57 @@
 // src/routes/index.jsx
 import { Routes, Route } from "react-router-dom"
-// Ajuste nos caminhos de importação para corresponder à sua estrutura de pastas
-import PublicProducts from "../pages/PublicProducts"  // A página pública de produtos está em src/pages/index.jsx
-import PrivateProducts from "../pages/PrivateProducts"  // A página privada de produtos está em src/pages/index.jsx
-import Home from "../pages/Home" // A página home está em src/pages/Home/index.jsxx
-import Login from "../pages/Login"  // A página login está em src/pages/Login/index.jsx
-import Carrinho from "../pages/Carrinho"
 
-import PrivateRoute from "../components/PrivateRoute"  // O componente de Rota Privada está em src/components/index.jsx
+// Páginas principais
+import Home from "../pages/Home"
+import Login from "../pages/Login"
+import PublicProducts from "../pages/PublicProducts"
+import PrivateProducts from "../pages/PrivateProducts"
+import Carrinho from "../pages/Carrinho"
+import AdminDashboard from "../pages/AdminDashboard" // certifique-se que essa página exista
+import NotAuthorized from "../pages/NotAuthorized"   // certifique-se que essa página exista
+
+// Componentes de proteção de rota
+import PrivateRoute from "../components/PrivateRoute"
+import PrivateRouteAdmin from "../components/PrivateRouteAdmin"
 
 const RoutesConfig = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />  {/* Página Home */}
-      <Route path="/login" element={<Login />} />  {/* Página de Login */}
+      {/* Rotas públicas */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/products-general" element={<PublicProducts />} />
+      <Route path="/not-authorized" element={<NotAuthorized />} />
+
+      {/* Rotas protegidas - usuário logado */}
       <Route
         path="/products-client"
         element={
           <PrivateRoute>
-            <PrivateProducts />  
+            <PrivateProducts />
           </PrivateRoute>
         }
-      />{/* Página privada de produtos */}
-
+      />
       <Route
         path="/carrinho"
         element={
-          <PrivateRoute> 
+          <PrivateRoute>
             <Carrinho />
           </PrivateRoute>
         }
-      /> {/* Página privada do carrinho */}
-      
+      />
+
+      {/* Rota protegida - apenas administradores */}
+      <Route
+        path="/admin"
+        element={
+          <PrivateRouteAdmin>
+            <AdminDashboard />
+          </PrivateRouteAdmin>
+        }
+      />
     </Routes>
   )
 }
 
 export default RoutesConfig
-

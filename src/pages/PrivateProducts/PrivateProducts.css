@@ -1,4 +1,4 @@
-/* src/pages/PrivateProducts/PrivateProducts.css */
+/* src/components/PrivateProducts.css */
 
 .container {
   margin-top: 120px; /* Para garantir que o conteúdo não invada o Navbar fixo */
@@ -82,3 +82,26 @@
   background-color: rgb(0, 255, 0);
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
+}
