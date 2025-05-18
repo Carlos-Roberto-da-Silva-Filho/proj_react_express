@@ -4,30 +4,30 @@ import "./Home.css"
 const Home = () => {
   return (
     <>
-      <h1>E-commerce com React</h1>
+      <h1>E-commerce com React - Integrado ao Back End com Express</h1>
       <ul>
-        <li>Projeto foi desenvolvido com o objetivo de aplicar conhecimentos de React na construção de uma aplicação web moderna e funcional.</li>
+        <li>Este projeto evoluiu para integrar funcionalidades administrativas robustas e um backend dedicado para gerenciamento de dados seguro.</li>
       </ul>
 
-      <h2>Tecnologias e Recursos</h2>
+      <h2>Aprimoramentos e Arquitetura Backend</h2>
       <ul>
-        <li> <strong>React Hooks:</strong> uso de <code>useState</code> e{" "} <code>useEffect</code> para manipulação de estado e efeitos colaterais. </li>
-        <li> <strong>Axios:</strong> biblioteca para requisições HTTP.</li>
-        <li> <strong>Context API:</strong> uso de <code>createContext</code> e{" "} <code>useContext</code> para controle global de autenticação (<code>AuthContext</code>) e carrinho de compras (<code>CartContext</code>).
-        </li>
-        <li> <strong>LocalStorage e SessionStorage:</strong> utilizados para persistência de dados do carrinho e autenticação entre sessões. </li>
-        <li> <strong>Autenticação:</strong> simulação de login e logout com uso de token armazenado no <code>sessionStorage</code>. </li>
-        <li> <strong>Conversão de moeda:</strong> uso de um contexto separado (<code>CurrencyContext</code>) para conversão de valores de dólar (USD) para real (BRL), com base em taxa gerada por API. </li>
-        <li> <strong>Roteamento:</strong> utilização do{" "} <code>react-router-dom</code> para gerenciamento de rotas públicas e privadas. </li>
+        <li> <strong>Backend Node.js:</strong> implementação de um servidor backend com Express para manipulação de dados e lógica administrativa.</li>
+        <li> <strong>Autenticação Segura:</strong> utilização de <code>bcrypt</code> para hash de senhas, garantindo maior segurança no armazenamento e autenticação de usuários.</li>
+        <li> <strong>API Administrativa:</strong> criação de rotas protegidas para gerenciar produtos (listar, buscar, criar, editar, excluir) e atualizar estoque.</li>
+        <li> <strong>Persistência de Dados:</strong> uso de arquivos JSON para simular um banco de dados, facilitando o armazenamento e a manipulação dos dados dos produtos e usuários.</li>
+        <li> <strong>Middleware de Autenticação (JWT):</strong> implementação para proteger as rotas administrativas, verificando a validade dos tokens de acesso.</li>
+        <li> <strong>Upload de Imagens (Multer):</strong> integração para permitir o upload de imagens de produtos através do painel administrativo.</li>
+        <li> <strong>Controle de Acesso:</strong> separação de usuários comuns e administradores, com diferentes níveis de acesso às funcionalidades da aplicação.</li>
       </ul>
 
-      <h2>Funcionalidades Desenvolvidas</h2>
+      <h2>Novas Funcionalidades Administrativas</h2>
       <ul>
-        <li>Listagem de produtos obtidos via API externa (DummyJSON).</li>
-        <li>Visualização detalhada de cada produto com imagem, preço em BRL e nome. </li>
-        <li>Adição ao carrinho com controle individual de quantidade por produto e respectivo resumno </li>
-        <li>Autenticação com controle de acesso a páginas protegidas. </li>
-        <li> Armazenamento automático e sincronizado do carrinho no{" "} <code>localStorage</code>.</li>
+        <li>Painel de administração dedicado para gerenciamento completo dos produtos.</li>
+        <li>Listagem, busca e visualização detalhada de produtos no painel administrativo.</li>
+        <li>Funcionalidade de criar novos produtos com título, preço, estoque e imagem.</li>
+        <li>Opção de editar informações de produtos existentes, incluindo a atualização da imagem.</li>
+        <li>Exclusão de produtos do sistema através do painel administrativo.</li>
+        <li>Interface para atualizar o estoque de produtos de forma rápida e eficiente.</li>
       </ul>
     </>
   )
