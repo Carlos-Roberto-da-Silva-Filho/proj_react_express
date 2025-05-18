@@ -71,8 +71,7 @@ Este projeto representa uma evolução de um e-commerce construído com React, i
 
 1.  **Clone o repositório do frontend:**
     ```bash
-    git clone [https://github.com/Jovens-Genios/Trilha-de-Aprendizado-Frontend](https://github.com/Jovens-Genios/Trilha-de-Aprendizado-Frontend)
-    cd [nome da pasta do seu repositório frontend]
+    git clone https://github.com/Carlos-Roberto-da-Silva-Filho/proj_react_express.git
     ```
 2.  **Instale as dependências:**
     ```bash
